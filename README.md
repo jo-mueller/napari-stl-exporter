@@ -1,12 +1,12 @@
-# napari-stl
+# napari-stl-exporter
 
-[![License](https://img.shields.io/pypi/l/napari-stl.svg?color=green)](https://github.com/jo-mueller/napari-stl/raw/master/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/napari-stl.svg?color=green)](https://pypi.org/project/napari-stl)
-[![Python Version](https://img.shields.io/pypi/pyversions/napari-stl.svg?color=green)](https://python.org)
-[![tests](https://github.com/jo-mueller/napari-stl/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl/actions)
-[![codecov](https://codecov.io/gh/jo-mueller/napari-stl/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl)
+[![License](https://img.shields.io/pypi/l/napari-stl-exporter.svg?color=green)](https://github.com/jo-mueller/napari-stl-exporter/raw/master/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/napari-stl-exporter.svg?color=green)](https://pypi.org/project/napari-stl-exporter)
+[![Python Version](https://img.shields.io/pypi/pyversions/napari-stl-exporter.svg?color=green)](https://python.org)
+[![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
+[![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-Exports stl
+Exports label images to 3D-printable stl files
 
 ----------------------------------
 
@@ -22,9 +22,9 @@ https://napari.org/docs/plugins/index.html
 
 ## Installation
 
-You can install `napari-stl` via [pip]:
+You can install `napari-stl-exporter` via [pip]:
 
-    pip install napari-stl
+    pip install napari-stl-exporter
 
 ## Contributing
 
@@ -34,7 +34,7 @@ the coverage at least stays the same before you submit a pull request.
 ## License
 
 Distributed under the terms of the [BSD-3] license,
-"napari-stl" is free and open source software
+"napari-stl-exporter" is free and open source software
 
 ## Issues
 
