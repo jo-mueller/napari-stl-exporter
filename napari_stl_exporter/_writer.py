@@ -7,14 +7,52 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 Replace code below according to your needs
 """
 
+import os
+from skimage import measure
+from stl import mesh
+
 from napari_plugin_engine import napari_hook_implementation
 
+supported_layers = ['labels']
 
 @napari_hook_implementation
-def napari_get_writer():
-    pass
+def napari_get_writer(path, layer_types):
+    
+    # Check that only supported layers have been passed
+    for lt in set(layer_types):
+        if lt not in supported_layers:
+            return None
+    
+    print(path)
+    
+    if isinstance(path, str) and path.endswith('.stl'):
+        return napari_write_image
+    else:
+        return None
+
 
 
 @napari_hook_implementation
-def napari_write_image():
-    pass
+def napari_write_image(path, data, meta):
+    
+    if isinstance(path, str) and path.endswith('.stl'):
+    
+        # binarize labels
+        labels[labels != 0] = 1
+    
+        # marching cubes
+        verts, faces, normals, values = measure.marching_cubes(labels, 0)
+        
+        # Create the mesh
+        obj = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+        for i, f in enumerate(faces):
+            for j in range(3):
+                obj.vectors[i][j] = vertices[f[j],:]
+                
+        # Write the mesh to file
+        obj.save(path)
+        print(f'stl written to {path}')
+        return path
+    
+    else:
+        return None
