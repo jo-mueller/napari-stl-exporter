@@ -34,7 +34,7 @@ def napari_get_writer(path, layer_types):
 def napari_write_labels(path, data, meta):
     
     if isinstance(path, str) and path.endswith('.stl'):
-    
+        data = np.asarray(data)
         # binarize labels
         data[data != 0] = 1
     
