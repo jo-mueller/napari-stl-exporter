@@ -10,7 +10,10 @@ Exports label images to 3D-printable stl files.
 
 ## Features
 
-You can easily create label layers from normal image layers in napari by converting them:
+Starting point is a label layer, e.g. after image segmentation. See this [list for napari's segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
+![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/head_screenshot.png)
+
+Alternatively, you can load a binary image, e.g. as TIF image and then easily create label layers from an image layer in napari right-clicking on the layer and by converting the layer:
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
 
 The label layer is then saved as a 3D-printable stl file if the filename is provided accordingly (e.g., _MyExampleFile.stl_). To actually send your object to a 3D-printer, it has to be further converted with a Slicer program which actually controls the print parameters (Level of detail, layer thickness, etc). Popular freeware slicers are:
@@ -18,7 +21,8 @@ The label layer is then saved as a 3D-printable stl file if the filename is prov
 * [Slic3r](https://slic3r.org/)
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/)
 
-
+You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
+![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/head_screenshot_browser.png)
 
 ----------------------------------
 
