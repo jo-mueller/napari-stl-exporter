@@ -6,7 +6,15 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-Exports label images to 3D-printable stl files
+Exports label images to 3D-printable stl files. You can easily create label layers from normal image layers in napari by converting them: ![Layer conversion](https://https://github.com/jo-mueller/napari-stl-exporter/tree/main/data/Pyramid.tif). The label layer is then saved as a 3D-printable stl file if the filename is provided accordingly (_MyExampleFile.stl_).
+
+# 3D printing:
+To actually send your object to a 3D-printer, it has to be further converted with a Slicer program which actually controls the print parameters (Level of detail, layer thickness, etc). Popular freeware slicers are:
+
+* [Slic3r](https://slic3r.org/)
+* [Prusa Slicer](https://www.prusa3d.com/prusaslicer/)
+
+
 
 ----------------------------------
 
