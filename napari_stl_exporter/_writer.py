@@ -12,6 +12,8 @@ from skimage import measure
 from stl import mesh
 import numpy as np
 
+from . import func
+
 from napari_plugin_engine import napari_hook_implementation
 
 supported_layers = ['labels']
@@ -34,18 +36,8 @@ def napari_get_writer(path, layer_types):
 def napari_write_labels(path, data, meta):
     
     if isinstance(path, str) and path.endswith('.stl'):
-        data = np.asarray(data)
-        # binarize labels
-        data[data != 0] = 1
-    
-        # marching cubes
-        verts, faces, normals, values = measure.marching_cubes(data, 0)
         
-        # Create the mesh
-        obj = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
-        for i, f in enumerate(faces):
-            for j in range(3):
-                obj.vectors[i][j] = verts[f[j],:]
+        obj = func.convert_binary2frame(data)
                 
         # Write the mesh to file
         obj.save(path)
