@@ -6,15 +6,17 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can then be read by common 3D-printing slicer programs (see below).
+This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can be [viewed on github](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/Pyramid.stl) and are readable for common 3D-printing slicer programs (see [below](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/README.md#3d-printing)).
 
-![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
+![input_output](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/input_output.png)
 
 ## Usage
-The napari-stl-exporter requires labeled, 3D input data. The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
+Starting point is a label layer, e.g. after image segmentation. See this [list for napari's segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1). The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
 
 
 ### Preparing label data
+You can load a binary image, e.g. as TIF image and then easily create label layers from an image layer in napari right-clicking on the layer and by converting the layer:
+
 - **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
 ```python
 import napari
@@ -30,7 +32,7 @@ label_layer = viewer.add_labels(data, name='3D object')
 
 ```
 
-- **Interactively**: Alternatively, it is possibly to drag and drop example data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
+- **Interactively**: Alternatively, it is possibly to drag and drop example (tif) data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
 
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
 
@@ -47,7 +49,10 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Slic3r](https://slic3r.org/): Documentation [here](https://manual.slic3r.org/intro/overview)
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
+## Known issues
 
+- Missing walls in stl-model: In order for all object boundaries to be recognized correctly, it is necessary to have a layer of empty (i.e., zero-valued) voxels between the object and the image boundaries. Otherwise, some edges of the object may not be detected correctly.
+- Large images: Processing large images (~ 1000 x 1000 x 100) requires large amount of memory. In this case it is advised to crop or resize (e.g., downsample) the input image.
 
 ----------------------------------
 
