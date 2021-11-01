@@ -47,7 +47,10 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Slic3r](https://slic3r.org/): Documentation [here](https://manual.slic3r.org/intro/overview)
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
+## Known issues
 
+- Hollow object: In order for all object boundaries to be recognized correctly, it is necessary to have a layer of empty (i.e., zero-valued) voxels between the object and the image boundaries. Otherwise, some edges of the object may not be detected correctly.
+- Large images: Processing large images (~ 1000 x 1000 x 100) requires large amount of memory. In this case it is advised to crop or resize (e.g., downsample) the input image.
 
 ----------------------------------
 
