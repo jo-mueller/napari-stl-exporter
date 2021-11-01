@@ -6,7 +6,7 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can then be read by common 3D-printing slicer programs (see [below](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/README.md#3d-printing)).
+This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can be [viewed on github](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/Pyramid.stl) and are readable for common 3D-printing slicer programs (see [below](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/README.md#3d-printing)).
 
 ![input_output](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/input_output.png)
 
