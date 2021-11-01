@@ -8,7 +8,7 @@
 
 This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can then be read by common 3D-printing slicer programs (see below).
 
-![input_output](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/Pyramid.stl)
+![input_output](https://github.com/jo-mueller/napari-stl-exporter/blob/improve_documentation/doc/input_output.png)
 
 ## Usage
 Starting point is a label layer, e.g. after image segmentation. See this [list for napari's segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1). The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
