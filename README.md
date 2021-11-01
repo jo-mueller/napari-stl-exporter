@@ -14,7 +14,7 @@ This plugin allows to convert 3D label images to 3D-printable *.stl* files using
 The napari-stl-exporter requires labeled, 3D input data. The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
 
 
-### Preparing label daata
+### Preparing label data
 - **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
 ```python
 import napari
