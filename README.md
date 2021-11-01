@@ -11,10 +11,12 @@ This plugin allows to convert 3D label images to 3D-printable *.stl* files using
 ![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
 
 ## Usage
-The napari-stl-exporter requires labeled, 3D input data. The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
+Starting point is a label layer, e.g. after image segmentation. See this [list for napari's segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1). The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
 
 
 ### Preparing label data
+You can load a binary image, e.g. as TIF image and then easily create label layers from an image layer in napari right-clicking on the layer and by converting the layer:
+
 - **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
 ```python
 import napari
@@ -30,7 +32,7 @@ label_layer = viewer.add_labels(data, name='3D object')
 
 ```
 
-- **Interactively**: Alternatively, it is possibly to drag and drop example data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
+- **Interactively**: Alternatively, it is possibly to drag and drop example (tif) data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
 
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
 
