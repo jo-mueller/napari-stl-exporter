@@ -49,7 +49,7 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 
 ## Known issues
 
-- Hollow object: In order for all object boundaries to be recognized correctly, it is necessary to have a layer of empty (i.e., zero-valued) voxels between the object and the image boundaries. Otherwise, some edges of the object may not be detected correctly.
+- Missing walls in stl-model: In order for all object boundaries to be recognized correctly, it is necessary to have a layer of empty (i.e., zero-valued) voxels between the object and the image boundaries. Otherwise, some edges of the object may not be detected correctly.
 - Large images: Processing large images (~ 1000 x 1000 x 100) requires large amount of memory. In this case it is advised to crop or resize (e.g., downsample) the input image.
 
 ----------------------------------
