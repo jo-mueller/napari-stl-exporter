@@ -17,13 +17,13 @@ Starting point is a label layer, e.g. after image segmentation. See this [list f
 ### Preparing label data
 You can load a binary image, e.g. as TIF image and then easily create label layers from an image layer in napari right-clicking on the layer and by converting the layer:
 
-- **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
+- **Programmatically**: Download the [example data](https://github.com/jo-mueller/napari-stl-exporter/tree/improve_documentation/data) and add a [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
 ```python
 import napari
 from skimage import io
 
 # Load and binarize image
-data = io.imread('Path to input data')
+data = io.imread('SomePath\Pyramid.tif')
 data[data != 0] = 1
 
 # Add data to viewer
@@ -32,16 +32,16 @@ label_layer = viewer.add_labels(data, name='3D object')
 
 ```
 
-- **Interactively**: Alternatively, it is possibly to drag and drop example (tif) data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
+- **Interactively**: Download the [example data](https://github.com/jo-mueller/napari-stl-exporter/tree/improve_documentation/data) data and open it with Napari. Convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
 
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
 
 ### Saving data
 To save the model as an *.stl* file, export it by selecting ```File->Save Selected Layer(s)``` and save it as ```MyModel.stl```, which will automatically call the conversion. Alternativaley, use 
 
-```napari.save_layers(r'SomePath\test.stl', [label_layer])```
+```napari.save_layers(r'SomePath\Pyramid.stl', [label_layer])```
 
-to save the previously generated label layer as .stl file. The label layer is then saved as a 3D-printable *.stl* file if the filename is provided accordingly (e.g., ```test.stl```). 
+to save the previously generated label layer as .stl file. The label layer is then saved as a 3D-printable *.stl* file if the filename is provided accordingly (e.g., ```Pyramid.stl```). 
 
 ### 3D-printing
 To actually send your object to a 3D-printer, it has to be further converted to the *.gcode* format with a Slicer program. The latter convert the 3D object to machine-relevant parameters (printing detail, motor trajectories, etc). Popular slicers are:
