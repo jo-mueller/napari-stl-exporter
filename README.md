@@ -11,35 +11,30 @@ This plugin allows to convert 3D label images to 3D-printable *.stl* files using
 ![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
 
 ## Usage
-The napari-stl-exporter requires labeled, 3D input data. The data is then converted to the 3D-printable *.stl* format simply by specifying the stl-file extension uppon image export in napari. For simple example data, see [here](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data).
-
+The napari-stl-exporter requires labeled, 3D input data. To segment your 3D image and create 3D label images out of it, see this [list of napari's image segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
+The 3D label image can then be converted to a 3D-printable *.stl* file by specifying the ".stl"-file extension uppon image export in napari using the menu `File > Save selected layer(s)...`. 
 
 ### Preparing label data
+- **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the napari viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
+
+![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
+
 - **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
 ```python
 import napari
 from skimage import io
 
 # Load and binarize image
-data = io.imread('Path to input data')
+data = io.imread('/Path/to/input/data')
 data[data != 0] = 1
 
 # Add data to viewer
 viewer = napari.Viewer()
 label_layer = viewer.add_labels(data, name='3D object')
 
+# save the layer as 3D printable file to disc
+napari.save_layers(r'/some/path/test.stl', [label_layer])
 ```
-
-- **Interactively**: Alternatively, it is possibly to drag and drop example data into the viewer and convert it to a labels layer by rightclicking on the entry in the layer list and select ```Convert to Labels```: 
-
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
-
-### Saving data
-To save the model as an *.stl* file, export it by selecting ```File->Save Selected Layer(s)``` and save it as ```MyModel.stl```, which will automatically call the conversion. Alternativaley, use 
-
-```napari.save_layers(r'SomePath\test.stl', [label_layer])```
-
-to save the previously generated label layer as .stl file. The label layer is then saved as a 3D-printable *.stl* file if the filename is provided accordingly (e.g., ```test.stl```). 
 
 ### 3D-printing
 To actually send your object to a 3D-printer, it has to be further converted to the *.gcode* format with a Slicer program. The latter convert the 3D object to machine-relevant parameters (printing detail, motor trajectories, etc). Popular slicers are:
@@ -48,7 +43,7 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
 You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/head_screenshot_browser.png)
+![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/pyramid_browser_screenshot.png)
 
 ----------------------------------
 
