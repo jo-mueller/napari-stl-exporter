@@ -43,7 +43,7 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
 You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/head_screenshot_browser.png)
+![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/pyramid_browser_screenshot.png)
 
 ----------------------------------
 
