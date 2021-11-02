@@ -15,7 +15,7 @@ The napari-stl-exporter requires labeled, 3D input data. To segment your 3D imag
 The 3D label image can then be converted to a 3D-printable *.stl* file by specifying the ".stl"-file extension uppon image export in napari using the menu `File > Save selected layer(s)...`. 
 
 ### Preparing label data
-- **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
+- **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the napari viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
 
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
 
