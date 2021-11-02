@@ -11,8 +11,8 @@ This plugin allows to convert 3D label images to 3D-printable *.stl* files using
 ![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
 
 ## Usage
-The napari-stl-exporter requires labeled, 3D input data. So segment your 3D image and create 3D label images out of it, see this [list for napari's segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
-The 3D label image can then be converted to 3D-printable *.stl* files by specifying the "stl"-file extension uppon image export in napari using the menu `Save selected layer(s)...`. 
+The napari-stl-exporter requires labeled, 3D input data. To segment your 3D image and create 3D label images out of it, see this [list of napari's image segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
+The 3D label image can then be converted to a 3D-printable *.stl* file by specifying the ".stl"-file extension uppon image export in napari using the menu `File > Save selected layer(s)...`. 
 
 ### Preparing label data
 - **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
