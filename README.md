@@ -32,14 +32,9 @@ data[data != 0] = 1
 viewer = napari.Viewer()
 label_layer = viewer.add_labels(data, name='3D object')
 
+# save the layer as 3D printable file to disc
+napari.save_layers(r'/some/path/test.stl', [label_layer])
 ```
-
-### Saving data
-To save the model as an *.stl* file, export it by selecting ```File->Save Selected Layer(s)``` and save it as ```MyModel.stl```, which will automatically call the conversion. Alternativaley, use 
-
-```napari.save_layers(r'SomePath\test.stl', [label_layer])```
-
-to save the previously generated label layer as .stl file. The label layer is then saved as a 3D-printable *.stl* file if the filename is provided accordingly (e.g., ```test.stl```). 
 
 ### 3D-printing
 To actually send your object to a 3D-printer, it has to be further converted to the *.gcode* format with a Slicer program. The latter convert the 3D object to machine-relevant parameters (printing detail, motor trajectories, etc). Popular slicers are:
