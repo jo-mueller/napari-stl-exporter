@@ -1,0 +1,9 @@
+# .napari/config.yml
+# ...
+project_urls:
+    Project Site: https://github.com/jo-mueller/napari-stl-exporter
+    Report Issues: https://github.com/jo-mueller/napari-stl-exporter/issues
+    Documentation: https://pypi.org/project/napari-stl-exporter/
+    User Support: https://github.com/jo-mueller/napari-stl-exporter/issues
+    Twitter: https://twitter.com/jm_mightypirate
+# ...
