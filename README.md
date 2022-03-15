@@ -6,13 +6,17 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/master/graph/badge.svg)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-This plugin allows to convert 3D label images to 3D-printable *.stl* files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated stl-files can then be read by common 3D-printing slicer programs (see below).
+This plugin allows to convert 3D label images to 3D-printable [*.stl*, *.ply*] files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated files can then be read by common 3D-printing slicer programs (see below).
 
 ![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
 
 ## Usage
 The napari-stl-exporter requires labeled, 3D input data. To segment your 3D image and create 3D label images out of it, see this [list of napari's image segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
-The 3D label image can then be converted to a 3D-printable *.stl* file by specifying the ".stl"-file extension uppon image export in napari using the menu `File > Save selected layer(s)...`. 
+The 3D label image can then be converted to a 3D-printable file by specifying the file extension to be one of the listed supported formats uppon image export in napari using the menu `File > Save selected layer(s)...`. 
+
+**Supported formats:**
+* *.stl*
+* *.ply*
 
 ### Preparing label data
 - **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the napari viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
