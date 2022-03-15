@@ -9,14 +9,13 @@ Replace code below according to your needs
 
 import os
 from skimage import measure
-import numpy as np
 
 from napari_plugin_engine import napari_hook_implementation
 from napari.types import LabelsData
 import vedo
 
 supported_layers = ['labels']
-supported_formats = ['stl', 'ply']
+supported_formats = ['.stl', '.ply']
 
 @napari_hook_implementation
 def napari_get_writer(path, layer_types):
@@ -25,29 +24,33 @@ def napari_get_writer(path, layer_types):
     for lt in set(layer_types):
         if lt not in supported_layers:
             return None
-    
-    if isinstance(path, str) and path.endswith('.stl'):
+
+    file_ext = os.path.splitext(path)[1]
+    if isinstance(path, str) and file_ext in supported_formats:
         return napari_write_labels
     else:
         return None
 
 @napari_hook_implementation
-def napari_write_labels(path:str, data: LabelsData, meta):
-    
-    if isinstance(path, str) and os.path.splitext(path)[1] in supported_formats:
+def napari_write_labels(path:str, data: LabelsData, meta) -> str:
 
-        # binarize labels
-        data[data != 0] = 1
+    file_ext = os.path.splitext(path)[1]
+    print(file_ext)
+    if isinstance(path, str) and file_ext in supported_formats:
 
-        # marching cubes
-        verts, faces, normals, values = measure.marching_cubes(data, 0)
-
-        # Create the mesh and save
-        mesh = vedo.mesh.Mesh((verts, faces))
+        mesh = _labels_to_mesh(data)
         vedo.write(mesh, path)
 
-        print(f'stl written to {path}')
         return path
     
     else:
         return None
+
+def _labels_to_mesh(label_image: LabelsData) -> vedo.mesh.Mesh:
+    "Convert a label image to vedo mesh"
+    # Binarize, retrieve surface and turn into vedo mesh
+    label_image[label_image != 0] = 1
+    verts, faces, normals, values = measure.marching_cubes(label_image, 0)
+    mesh = vedo.mesh.Mesh((verts, faces))
+
+    return mesh
