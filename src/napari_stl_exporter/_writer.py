@@ -35,7 +35,6 @@ def napari_get_writer(path, layer_types):
 def napari_write_labels(path:str, data: LabelsData, meta) -> str:
 
     file_ext = os.path.splitext(path)[1]
-    print(file_ext)
     if isinstance(path, str) and file_ext in supported_formats:
 
         mesh = _labels_to_mesh(data)
