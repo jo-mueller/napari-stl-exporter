@@ -25,7 +25,7 @@ def test_label_writer(tmpdir):
     assert os.path.exists(pth)
     assert ply_file is not None
 
-def test_surface_writer():
+def test_surface_writer(tmpdir):
 
     from skimage import measure
     import napari
@@ -34,8 +34,8 @@ def test_surface_writer():
     label_image[25:75, 25:75, 25:75] = 1
 
     surface = measure.marching_cubes(label_image, 0)
-    napari_write_surface(r'C:\Users\johan\Desktop\test2.stl',
-                         (surface[0], surface[1]), None)
+    napari_write_surface('test2.stl', (surface[0], surface[1]), None)
+    napari_write_surface('test2.ply', (surface[0], surface[1]), None)
 
 if __name__ == "__main__":
     test_surface_writer()
