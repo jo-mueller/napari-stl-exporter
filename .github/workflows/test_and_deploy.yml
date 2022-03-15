@@ -64,6 +64,11 @@ jobs:
         env:
           PLATFORM: ${{ matrix.platform }}
 
+     - name: Generate Report
+        run: |
+            pip install coverage
+            coverage run -m unittest
+
       - name: Coverage
         uses: codecov/codecov-action@v1
 
