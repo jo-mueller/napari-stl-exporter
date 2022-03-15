@@ -16,6 +16,7 @@ from napari.types import LabelsData
 import vedo
 
 supported_layers = ['labels']
+supported_formats = ['stl', 'ply']
 
 @napari_hook_implementation
 def napari_get_writer(path, layer_types):
@@ -33,7 +34,7 @@ def napari_get_writer(path, layer_types):
 @napari_hook_implementation
 def napari_write_labels(path:str, data: LabelsData, meta):
     
-    if isinstance(path, str) and path.endswith('.stl'):
+    if isinstance(path, str) and os.path.splitext(path)[1] in supported_formats:
 
         # binarize labels
         data[data != 0] = 1
