@@ -11,23 +11,38 @@ import os
 from skimage import measure
 
 from napari_plugin_engine import napari_hook_implementation
-from napari.types import LabelsData
+from napari.types import LabelsData, SurfaceData
 import vedo
 
-supported_layers = ['labels']
+supported_layers = ['labels', 'surface']
 supported_formats = ['.stl', '.ply']
 
+# @napari_hook_implementation
+# def napari_get_writer(path, layer_types):
+
+#     print(path)
+#     # Check that only supported layers have been passed
+#     for lt in set(layer_types):
+#         if lt not in supported_layers:
+#             return None
+
+#     file_ext = os.path.splitext(path)[1]
+#     if isinstance(path, str) and file_ext in supported_formats:
+#         return [napari_write_labels, napari_write_surface]
+#     else:
+#         return None
+
 @napari_hook_implementation
-def napari_get_writer(path, layer_types):
-    
-    # Check that only supported layers have been passed
-    for lt in set(layer_types):
-        if lt not in supported_layers:
-            return None
+def napari_write_surface(path:str, data: SurfaceData, meta) -> str:
 
     file_ext = os.path.splitext(path)[1]
     if isinstance(path, str) and file_ext in supported_formats:
-        return napari_write_labels
+
+        mesh = vedo.mesh.Mesh((data[0], data[1]))
+        vedo.write(mesh, path)
+
+        return path
+    
     else:
         return None
 
