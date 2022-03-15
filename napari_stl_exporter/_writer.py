@@ -25,7 +25,7 @@ def napari_get_writer(path, layer_types):
             return None
     
     if isinstance(path, str) and path.endswith('.stl'):
-        return napari_write_image
+        return napari_write_labels
     else:
         return None
 
