@@ -13,6 +13,7 @@ from stl import mesh
 import numpy as np
 
 from napari_plugin_engine import napari_hook_implementation
+from napari.types import LabelsData
 
 supported_layers = ['labels']
 
@@ -30,8 +31,7 @@ def napari_get_writer(path, layer_types):
         return None
 
 
-@napari_hook_implementation
-def napari_write_labels(path, data, meta):
+def napari_write_labels(path:str, data: LabelsData, meta):
     
     if isinstance(path, str) and path.endswith('.stl'):
         data = np.asarray(data)
