@@ -1,0 +1,13 @@
+name: napari-stl-exporter
+schema_version: 0.1.0
+contributions:
+  commands:
+  - id: napari-stl-exporter.write_labels
+    title: Write Labels
+    python_name: napari_stl_exporter._writer:napari_write_labels
+  writers:
+  - command: napari-stl-exporter.write_labels
+    layer_types:
+    - labels
+    filename_extensions: [".stl", ".ply"]
+    display_name: labels
