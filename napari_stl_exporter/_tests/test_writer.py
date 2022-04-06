@@ -1,4 +1,5 @@
 from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surface
+from napari_stl_exporter._test_data import make_pyramid_label, make_pyramid_surface
 import numpy as np
 import os
 
@@ -37,3 +38,10 @@ def test_writer(tmpdir):
     stl_file = napari_write_surface(pth, surf, None)
     assert os.path.exists(pth)
     assert stl_file is not None
+
+def test_sample_data():
+    label_image = make_pyramid_label()
+    assert label_image is not None
+
+    surface_image = make_pyramid_surface()
+    assert surface_image is not None
