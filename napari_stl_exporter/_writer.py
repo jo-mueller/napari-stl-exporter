@@ -2,25 +2,33 @@ import os
 from skimage import measure
 import vedo
 
-from napari.types import LabelsData
-from typing import Any, Optional
+from napari.types import LabelsData, SurfaceData
+from typing import Optional
 
 
 supported_layers = ['labels']
 supported_formats = ['.stl', '.ply']
 
-def napari_write_labels(path: str, data: Any, meta: dict) -> Optional[str]:
+def napari_write_surface(path: str, data: SurfaceData, meta: dict
+                         ) -> Optional[str]:
+    file_ext = os.path.splitext(path)[1]
+    if file_ext in supported_formats:
+        mesh = vedo.mesh.Mesh((data[0], data[1]))
+        vedo.write(mesh, path)
+
+        return path
+
+
+def napari_write_labels(path: str, data: LabelsData, meta: dict
+                        ) -> Optional[str]:
 
     file_ext = os.path.splitext(path)[1]
-    if isinstance(path, str) and file_ext in supported_formats:
+    if file_ext in supported_formats:
 
         mesh = _labels_to_mesh(data)
         vedo.write(mesh, path)
 
         return path
-
-    else:
-        return None
 
 def _labels_to_mesh(label_image: LabelsData) -> vedo.mesh.Mesh:
     "Convert a label image to vedo mesh"
