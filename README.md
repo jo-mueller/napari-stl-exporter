@@ -6,31 +6,39 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/main/graph/badge.svg?token=9zctLzazD9)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-This plugin allows to convert 3D label images to 3D-printable [*.stl*, *.ply*] files using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/). The generated files can then be read by common 3D-printing slicer programs (see below).
+This plugin allows to convert data in Napari to 3D-printable [*.stl*, *.ply*] files using various algorithms. The generated files can then be read by common 3D-printing slicer programs (see below).
 
 ![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
 
 ## Usage
-The napari-stl-exporter requires labeled, 3D input data. To segment your 3D image and create 3D label images out of it, see this [list of napari's image segmentation plugins](https://www.napari-hub.org/?search=segmentation&sort=relevance&page=1).
-The 3D label image can then be converted to a 3D-printable file by specifying the file extension to be one of the listed supported formats uppon image export in napari using the menu `File > Save selected layer(s)...`. 
+This section explains which data can be written with the napari-stl-exported and how you can do so.
 
-**Supported formats:**
-* *.stl*
-* *.ply*
+### Supported Napari layers:
 
-### Preparing label data
-- **Interactively**: After loading a binary image ([example data](https://github.com/jo-mueller/napari-stl-exporter/tree/main/data)), e.g. by drag and drop the file onto the napari viewer, it might be neccessary to convert it to a labels layer using the right-click menu on the layer in the layer list and selecting ```Convert to Labels```: 
+Currently supported Napari layer types are:
+* Label layers: The label data is converted to surface data using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/) and is then exported using [Vedo](https://vedo.embl.es/).
+* Surface layers: Surface data can be natively exported with the [Vedo](https://vedo.embl.es/) library.
 
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/convert_to_label.png)
+### Supported file formats:
+Currently supported file formats for export include:
+* *.stl*: Common data format for 3D printing, can be read by common 3D slicer programs (see below)
+* *.ply*: Common data storage format for surfaces, needs to be converted to *.stl* either with this plugin or with suitable software (e.g., Blender).
 
-- **Programmatically**: A [Napari Label layer](https://napari.org/api/stable/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/api/stable/napari.view_layers.Viewer.html?highlight=add_labels#napari.view_layers.Viewer.add_labels) with this code snippet:
+### Preparing data
+- **Interactively**: You can create sample label/surface data for export using the built-in functions as shown here:
+
+<img src="./doc/1_sample_data.png" width=45% height=45%>
+
+To export the data, simply save the selected layer with `File > Save Selected Layer(s)` and specify the file ending to be `some_file.stl` or `some_file.ply`.
+
+- **Programmatically**: A [Napari Label layer](https://napari.org/api/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/gallery/add_labels.html?highlight=add_labels) with this code snippet:
 ```python
 import napari
-from skimage import io
+import numpy as np
 
 # Load and binarize image
-data = io.imread('/Path/to/input/data')
-data[data != 0] = 1
+label_image = np.zeros((100, 100, 100), dtype=int)
+label_image[25:75, 25:75, 25:75] = 1
 
 # Add data to viewer
 viewer = napari.Viewer()
@@ -46,7 +54,7 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Slic3r](https://slic3r.org/): Documentation [here](https://manual.slic3r.org/intro/overview)
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
-You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
+*Note*: You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
 ![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/pyramid_browser_screenshot.png)
 
 ----------------------------------
