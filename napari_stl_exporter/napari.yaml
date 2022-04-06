@@ -1,13 +1,36 @@
 name: napari-stl-exporter
 schema_version: 0.1.0
 contributions:
-  commands:
-  - id: napari-stl-exporter.write_labels
-    title: Write Labels
-    python_name: napari_stl_exporter._writer:napari_write_labels
-  writers:
-  - command: napari-stl-exporter.write_labels
-    layer_types:
-    - labels
-    filename_extensions: [".stl", ".ply"]
-    display_name: labels
+    commands:
+    - id: napari-stl-exporter.write_labels
+      title: Write Labels
+      python_name: napari_stl_exporter._writer:napari_write_labels
+    - id: napari-stl-exporter.write_surface
+      title: Write Surface
+      python_name: napari_stl_exporter._writer:napari_write_surface
+    - id: napari-stl-exporter.make_pyramid_label
+      title: Create a label image of a pyramid
+      python_name: napari_stl_exporter._test_data:make_pyramid_label
+    - id: napari-stl-exporter.make_pyramid_surface
+      title: Create a surface image of a pyramid
+      python_name: napari_stl_exporter._test_data:make_pyramid_surface
+
+    sample_data:
+    - command: napari-stl-exporter.make_pyramid_label
+      display_name: Pyramid label image
+      key: PLL
+    - command: napari-stl-exporter.make_pyramid_surface
+      display_name: Pyramid surface image
+      key: PSL
+
+    writers:
+    - command: napari-stl-exporter.write_labels
+      layer_types:
+      - labels
+      filename_extensions: [".stl", ".ply"]
+      display_name: labels
+    - command: napari-stl-exporter.write_surface
+      layer_types:
+      - surface
+      filename_extensions: [".stl", ".ply"]
+      display_name: surface
