@@ -1,57 +1,17 @@
-"""
-This module is an example of a barebones writer plugin for napari
-
-It implements the ``napari_get_writer`` and ``napari_write_image`` hook specifications.
-see: https://napari.org/docs/dev/plugins/hook_specifications.html
-
-Replace code below according to your needs
-"""
-
 import os
 from skimage import measure
-
-from napari_plugin_engine import napari_hook_implementation
-from napari.types import LabelsData, SurfaceData
 import vedo
 
-supported_layers = ['labels', 'Surface']
+from napari.types import LabelsData
+from typing import Any, Optional
+
+
+supported_layers = ['labels']
 supported_formats = ['.stl', '.ply']
 
-@napari_hook_implementation
-def napari_get_writer(path, layer_types):
-
-    # Check that only supported layers have been passed
-    for lt in set(layer_types):
-        if lt not in supported_layers:
-            return None
-
-    print(layer_types)
+def napari_write_labels(path: str, data: Any, meta: dict) -> Optional[str]:
 
     file_ext = os.path.splitext(path)[1]
-
-    if isinstance(path, str) and file_ext in supported_formats:
-        return napari_write_labels
-    else:
-        return None
-
-@napari_hook_implementation
-def napari_write_surfaces(path:str, data: SurfaceData, meta) -> str:
-    file_ext = os.path.splitext(path)[1]
-    print(file_ext)
-    if isinstance(path, str) and file_ext in supported_formats:
-
-        mesh = vedo.mesh.Mesh((data))
-        vedo.write(mesh, path)
-
-        return path
-    else:
-        return None
-
-@napari_hook_implementation
-def napari_write_labels(path:str, data: LabelsData, meta) -> str:
-
-    file_ext = os.path.splitext(path)[1]
-    print(file_ext)
     if isinstance(path, str) and file_ext in supported_formats:
 
         mesh = _labels_to_mesh(data)
