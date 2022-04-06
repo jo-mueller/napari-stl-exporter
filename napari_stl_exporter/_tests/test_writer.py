@@ -39,9 +39,27 @@ def test_writer(tmpdir):
     assert os.path.exists(pth)
     assert stl_file is not None
 
+def test_writer_viewer(make_napari_viewer, tmpdir):
+    import napari
+    # Load and binarize image
+    label_image = np.zeros((100, 100, 100), dtype=int)
+    label_image[25:75, 25:75, 25:75] = 1
+
+    # Add data to viewer
+    viewer = make_napari_viewer()
+    label_layer = viewer.add_labels(label_image, name='3D object')
+
+    # save the layer as 3D printable file to disc
+    napari.save_layers(os.path.join(tmpdir, 'test.stl'), [label_layer])
+    assert os.path.exists(os.path.join(tmpdir, 'test.stl'))
+
 def test_sample_data():
     label_image = make_pyramid_label()
     assert label_image is not None
 
     surface_image = make_pyramid_surface()
     assert surface_image is not None
+
+if __name__ == '__main__':
+    import napari
+    test_writer_viewer(napari.Viewer, r'C:\Users\johamuel\Desktop')
