@@ -20,14 +20,3 @@ def image_to_surface(image:ImageData, z_multiplier: float = 1.0) -> SurfaceData:
     points_mesh[:, 0] = -z
 
     return (points_mesh, tri.simplices)
-
-if __name__ == '__main__':
-    import tifffile as tf
-    import napari
-
-    image = tf.imread(r'C:\Users\johamuel\Desktop\output_NASADEM.tif')
-    surf = image_to_surface(image, z_multiplier=0.25)
-
-    viewer = napari.Viewer()
-    viewer.add_surface(surf)
-    viewer.
