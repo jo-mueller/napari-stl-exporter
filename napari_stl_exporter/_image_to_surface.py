@@ -12,6 +12,7 @@ def image_to_surface(image:ImageData, z_multiplier: float = 1.0) -> SurfaceData:
     y = np.arange(image.shape[1])
     points = np.stack(list(product(x, y)))
     z = np.array([image[pt[0], pt[1]] for pt in points]).flatten() * z_multiplier
+    z = z - z.min()
 
     tri = spatial.Delaunay(points)
 
