@@ -1,5 +1,7 @@
 from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surface
-from napari_stl_exporter._test_data import make_pyramid_label, make_pyramid_surface
+from napari_stl_exporter._test_data import make_pyramid_label, make_pyramid_surface, make_landscape
+from napari_stl_exporter._image_to_surface import image_to_surface
+
 import numpy as np
 import os
 
@@ -53,13 +55,19 @@ def test_writer_viewer(make_napari_viewer, tmpdir):
     napari.save_layers(os.path.join(tmpdir, 'test.stl'), [label_layer])
     assert os.path.exists(os.path.join(tmpdir, 'test.stl'))
 
-def test_sample_data():
+def test_sample_data(make_napari_viewer, tmpdir):
     label_image = make_pyramid_label()
     assert label_image is not None
 
     surface_image = make_pyramid_surface()
     assert surface_image is not None
 
-if __name__ == '__main__':
-    import napari
-    test_writer_viewer(napari.Viewer, r'C:\Users\johamuel\Desktop')
+    landscape = make_landscape()
+
+    widget = image_to_surface()
+    surf = widget(landscape[0][0], z_multiplier=0.25)
+
+    viewer = make_napari_viewer()
+    viewer.add_surface(surf)
+
+    assert len(viewer.layers) == 1
