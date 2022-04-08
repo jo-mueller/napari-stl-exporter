@@ -56,8 +56,7 @@ napari.save_layers(r'/some/path/test.stl', [label_layer])
 
 In order to convert image data to a surface, you can use the function `Plugins > napari-stl-exporter: Image to surface`, which will create this widget:
 
-<img src="./doc/image_conversion_widget.png" width=45% height=45%>
-
+<img src="./doc/image_conversion_widget.PNG" width=45% height=45%>
 
 ### 3D-printing
 To actually send your object to a 3D-printer, it has to be further converted to the *.gcode* format with a Slicer program. The latter convert the 3D object to machine-relevant parameters (printing detail, motor trajectories, etc). Popular slicers are:
