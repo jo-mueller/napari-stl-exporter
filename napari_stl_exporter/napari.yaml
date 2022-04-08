@@ -8,12 +8,20 @@ contributions:
     - id: napari-stl-exporter.write_surface
       title: Write Surface
       python_name: napari_stl_exporter._writer:napari_write_surface
+
     - id: napari-stl-exporter.make_pyramid_label
       title: Create a label image of a pyramid
       python_name: napari_stl_exporter._test_data:make_pyramid_label
     - id: napari-stl-exporter.make_pyramid_surface
       title: Create a surface image of a pyramid
       python_name: napari_stl_exporter._test_data:make_pyramid_surface
+    - id: napari-stl-exporter.make_landscape_image
+      title: Create a landscape elevation model
+      python_name: napari_stl_exporter._test_data:make_landscape
+
+    - id: napari-stl-exporter.convert_image_to_surface
+      title: Convert an intensity image to a surface
+      python_name: napari_stl_exporter._image_to_surface:image_to_surface
 
     sample_data:
     - command: napari-stl-exporter.make_pyramid_label
@@ -22,6 +30,14 @@ contributions:
     - command: napari-stl-exporter.make_pyramid_surface
       display_name: Pyramid surface image
       key: PSL
+    - command: napari-stl-exporter.make_landscape_image
+      display_name: Landscape elevation model
+      key: LEM
+
+    widgets:
+    - command: napari-stl-exporter.convert_image_to_surface
+      display_name: Image to surface
+
 
     writers:
     - command: napari-stl-exporter.write_labels
