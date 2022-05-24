@@ -1,5 +1,5 @@
 name: napari-stl-exporter
-schema_version: 0.0.9
+schema_version: 0.0.10
 contributions:
     commands:
     - id: napari-stl-exporter.write_labels
@@ -20,7 +20,7 @@ contributions:
       display_name: Pyramid label image
       key: PLL
     - command: napari-stl-exporter.make_pyramid_surface
-      display_name: Pyramid surface image
+      display_name: Pyramid surface
       key: PSL
 
     writers:
