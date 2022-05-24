@@ -8,7 +8,7 @@
 
 This plugin allows to convert data in Napari to 3D-printable [*.stl*, *.ply*] files using various algorithms. The generated files can then be read by common 3D-printing slicer programs (see below).
 
-![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/model_and_printed_model.png" width=45% height=45%>
 
 ## Usage
 This section explains which data can be written with the napari-stl-exported and how you can do so.
