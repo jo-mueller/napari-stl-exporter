@@ -27,11 +27,12 @@ Currently supported file formats for export include:
 ### Preparing data
 - **Interactively**: You can create sample label/surface data for export using the built-in functions as shown here:
 
-<img src="./doc/1_sample_data.png" width=45% height=45%>
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/1_sample_data.png" width=45% height=45%>
 
 To export the data, simply save the selected layer with `File > Save Selected Layer(s)` and specify the file ending to be `some_file.stl` or `some_file.ply`.
 
 - **Programmatically**: A [Napari Label layer](https://napari.org/api/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/gallery/add_labels.html?highlight=add_labels) with this code snippet:
+
 ```python
 import napari
 import numpy as np
@@ -55,7 +56,8 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
 *Note*: You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/pyramid_browser_screenshot.png)
+
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/pyramid_browser_screenshot.png" width=45% height=45%>
 
 ----------------------------------
 
@@ -87,7 +89,7 @@ Distributed under the terms of the [BSD-3] license,
 
 ## Issues
 
-If you encounter any problems, please [file an issue] along with a detailed description or post to image.sc and tag ```El_Pollo_Diablo```
+If you encounter any problems, please [file an issue](https://github.com/jo-mueller/napari-stl-exporter/issues) along with a detailed description or post to image.sc and tag ```El_Pollo_Diablo```
 
 [napari]: https://github.com/napari/napari
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
