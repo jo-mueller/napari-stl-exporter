@@ -5,15 +5,22 @@ contributions:
     - id: napari-stl-exporter.write_labels
       title: Write Labels
       python_name: napari_stl_exporter._writer:napari_write_labels
+
     - id: napari-stl-exporter.write_surface
       title: Write Surface
       python_name: napari_stl_exporter._writer:napari_write_surface
+
     - id: napari-stl-exporter.make_pyramid_label
       title: Create a label image of a pyramid
       python_name: napari_stl_exporter._test_data:make_pyramid_label
+
     - id: napari-stl-exporter.make_pyramid_surface
       title: Create a surface image of a pyramid
       python_name: napari_stl_exporter._test_data:make_pyramid_surface
+
+    - id: napari-stl-exporter.import_surface
+      title: Read surface data from supported file types
+      python_name: napari_stl_exporter._reader:napari_import_surface
 
     sample_data:
     - command: napari-stl-exporter.make_pyramid_label
@@ -29,8 +36,14 @@ contributions:
       - labels
       filename_extensions: [".stl", ".ply"]
       display_name: labels
+
     - command: napari-stl-exporter.write_surface
       layer_types:
       - surface
       filename_extensions: [".stl", ".ply"]
       display_name: surface
+
+    readers:
+    - command: napari-stl-exporter.import_surface
+      accepts_directories: false
+      filename_patterns: ["*.stl", "*.ply"]
