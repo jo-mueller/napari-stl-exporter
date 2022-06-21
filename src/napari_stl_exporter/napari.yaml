@@ -34,16 +34,16 @@ contributions:
     - command: napari-stl-exporter.write_labels
       layer_types:
       - labels
-      filename_extensions: [".stl", ".ply"]
+      filename_extensions: [".stl", ".ply", ".obj"]
       display_name: labels
 
     - command: napari-stl-exporter.write_surface
       layer_types:
       - surface
-      filename_extensions: [".stl", ".ply"]
+      filename_extensions: [".stl", ".ply", ".obj"]
       display_name: surface
 
     readers:
     - command: napari-stl-exporter.import_surface
       accepts_directories: false
-      filename_patterns: ["*.stl", "*.ply"]
+      filename_patterns: ["*.stl", "*.ply", "*.obj"]

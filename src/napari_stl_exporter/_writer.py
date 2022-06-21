@@ -7,7 +7,7 @@ from typing import Optional
 
 
 supported_layers = ['labels']
-supported_formats = ['.stl', '.ply']
+supported_formats = ['.stl', '.ply', '.obj']
 
 def napari_write_surface(path: str, data: SurfaceData, meta: dict
                          ) -> Optional[str]:

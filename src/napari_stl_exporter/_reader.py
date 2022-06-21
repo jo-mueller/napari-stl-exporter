@@ -4,7 +4,7 @@ import os
 import vedo
 import numpy as np
 
-supported_formats = ['.stl', '.ply']
+supported_formats = ['.stl', '.ply', '.obj']
 
 def napari_import_surface(path: str) -> SurfaceData:
     """
