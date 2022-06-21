@@ -62,9 +62,15 @@ def test_reader(make_napari_viewer, tmpdir):
     viewer = make_napari_viewer()
 
     for ext in supported_formats:
-        napari_write_surfaces(os.path.join(tmpdir, 'test' + ext), pyramid, None)
-        _pyramid = napari_import_surface(os.path.join(tmpdir, 'test' + ext))[0]
+        path = os.path.join(tmpdir, 'test' + ext)
+        napari_write_surfaces(path, pyramid, None)
+        _pyramid = napari_import_surface(path)[0]
         viewer.add_surface(_pyramid[0], **_pyramid[1])
+
+        # make sure that a reader is found
+        reader = napari_stl_exporter._reader.get_reader(path)
+        data = reader(path)
+        assert data is not None
 
 
 if __name__ == '__main__':
