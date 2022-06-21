@@ -7,9 +7,9 @@ from typing import Optional
 
 
 supported_layers = ['labels']
-supported_formats = ['.stl', '.ply']
+supported_formats = ['.stl', '.ply', '.obj']
 
-def napari_write_surface(path: str, data: SurfaceData, meta: dict
+def napari_write_surfaces(path: str, data: SurfaceData, meta: dict
                          ) -> Optional[str]:
     file_ext = os.path.splitext(path)[1]
     if file_ext in supported_formats:
