@@ -45,5 +45,5 @@ contributions:
 
     readers:
     - command: napari-stl-exporter.import_surface
-      display_name: Import surface
-      filename_extensions: [".stl", ".ply"]
+      accepts_directories: false
+      filename_patterns: ["*.stl", "*.ply"]
