@@ -60,6 +60,19 @@ def test_sample_data():
     surface_image = make_pyramid_surface()
     assert surface_image is not None
 
+def test_reader(make_napari_viewer, tmpdir):
+    import napari_stl_exporter
+
+    pyramid = napari_stl_exporter.make_pyramid_surface()[0][0]
+
+    napari_stl_exporter.napari_write_surface(os.path.join(tmpdir, 'test.stl'), pyramid, None)
+    pyramid = napari_stl_exporter.napari_import_surface(os.path.join(tmpdir, 'test.stl'))
+
+    viewer = make_napari_viewer()
+    viewer.add_surface(pyramid)
+
+
+
 if __name__ == '__main__':
     import napari
-    test_writer_viewer(napari.Viewer, r'C:\Users\johamuel\Desktop')
+    test_reader(napari.Viewer, r'C:\Users\johamuel\Desktop')
