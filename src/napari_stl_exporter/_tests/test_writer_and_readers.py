@@ -1,4 +1,5 @@
-from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surface
+from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surfaces
+from napari_stl_exporter import napari_import_surface
 from napari_stl_exporter._test_data import make_pyramid_label, make_pyramid_surface
 import numpy as np
 import os
@@ -29,7 +30,7 @@ def test_writer(tmpdir):
 
     for ext in supported_formats:
         pth = os.path.join(str(tmpdir), "test_export" + ext)
-        stl_file = napari_write_surface(pth, surf, None)
+        stl_file = napari_write_surfaces(pth, surf, None)
         assert os.path.exists(pth)
         assert stl_file is not None
 
@@ -61,10 +62,9 @@ def test_reader(make_napari_viewer, tmpdir):
     viewer = make_napari_viewer()
 
     for ext in supported_formats:
-        napari_stl_exporter.napari_write_surface(os.path.join(tmpdir, 'test' + ext), pyramid, None)
-        pyramid = napari_stl_exporter.napari_import_surface(os.path.join(tmpdir, 'test' + ext))
-        viewer.add_surface(pyramid)
-
+        napari_write_surfaces(os.path.join(tmpdir, 'test' + ext), pyramid, None)
+        _pyramid = napari_import_surface(os.path.join(tmpdir, 'test' + ext))[0]
+        viewer.add_surface(_pyramid[0], **_pyramid[1])
 
 
 if __name__ == '__main__':
