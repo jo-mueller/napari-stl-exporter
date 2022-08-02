@@ -1,6 +1,6 @@
 from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surfaces
 from napari_stl_exporter import napari_import_surface
-from napari_stl_exporter._test_data import make_pyramid_label, make_pyramid_surface
+from napari_stl_exporter._sample_data import make_pyramid_label, make_pyramid_surface
 import numpy as np
 import os
 

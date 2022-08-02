@@ -12,11 +12,11 @@ contributions:
 
     - id: napari-stl-exporter.make_pyramid_label
       title: Create a label image of a pyramid
-      python_name: napari_stl_exporter._test_data:make_pyramid_label
+      python_name: napari_stl_exporter._sample_data:make_pyramid_label
 
     - id: napari-stl-exporter.make_pyramid_surface
       title: Create a surface image of a pyramid
-      python_name: napari_stl_exporter._test_data:make_pyramid_surface
+      python_name: napari_stl_exporter._sample_data:make_pyramid_surface
 
     - id: napari-stl-exporter.import_surface
       title: Read surface data from supported file types
