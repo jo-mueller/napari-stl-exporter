@@ -27,19 +27,24 @@ def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
     return (np.flip(mesh.points(), axis=1), np.asarray(mesh.faces()))
 
 @magic_factory
-def image_to_surface(image: ImageData, z_multiplier: float = 1.0) -> SurfaceData:
+def image_to_surface(image: ImageData,
+                     z_multiplier: float = 1.0,
+                     solidify: bool = True) -> SurfaceData:
     """
     Convert a 2D image to a surface mesh. The image intensity is used as z-coordinate of the mesh.
 
     Parameters
     ----------
     image : ImageData
+    z_multiplier: float
+        Multiplies the intensity-derived z-coordinate with this factor.
+    solidify: bool
+        Whether or not to extrude the mesh by an automatically
+        determined value to turn it into a solid (printable) object.
 
-    z_multiplier: Multiplies the intensity-derived z-coordinate with this factor.
     
     Returns
     -------
-
     surface: SUrfaceData
     """
 
@@ -58,4 +63,17 @@ def image_to_surface(image: ImageData, z_multiplier: float = 1.0) -> SurfaceData
     points_mesh[:, 1:] = points
     points_mesh[:, 0] = -z
 
-    return (points_mesh, tri.simplices)
+    surface = (points_mesh, tri.simplices)
+
+    if solidify:
+
+        # extrude mesh by maximum z-value * -1 and set all values of the extruded
+        # vertices to the same value to create a flat bottom.
+        extrude_distance = points_mesh[:, 0].max()
+        extruded_surface = list(extrude(surface, -extrude_distance))
+
+        extrude_surface[0][len(surface) + 1:] = -0.1
+        surface = extruded_surface
+
+
+    return surface
