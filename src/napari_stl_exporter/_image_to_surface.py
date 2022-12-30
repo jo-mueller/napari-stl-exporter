@@ -4,6 +4,15 @@ from magicgui import magic_factory
 
 @magic_factory
 def image_to_surface(image:ImageData, z_multiplier: float = 1.0) -> SurfaceData:
+    """
+    Convert a 2D image to a surface mesh. The image intensity is used as z-coordinate of the mesh.
+
+    Parameters
+    ----------
+    image : ImageData
+
+    z_multiplier: Multiplies the intensity-derived z-coordinate with this factor.
+    """
 
     import numpy as np
     from scipy import spatial
