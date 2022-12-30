@@ -6,36 +6,29 @@
 [![tests](https://github.com/jo-mueller/napari-stl-exporter/workflows/tests/badge.svg)](https://github.com/jo-mueller/napari-stl-exporter/actions)
 [![codecov](https://codecov.io/gh/jo-mueller/napari-stl-exporter/branch/main/graph/badge.svg?token=9zctLzazD9)](https://codecov.io/gh/jo-mueller/napari-stl-exporter)
 
-This plugin allows to convert data in Napari to 3D-printable [*.stl*, *.ply*] files using various algorithms. The generated files can then be read by common 3D-printing slicer programs (see below).
+This plugin allows to import and export surface data in Napari to common file formats. The generated file formats can be read by other common applications, and - in particular - allow *3D-printing*.
 
-![input_output](https://user-images.githubusercontent.com/38459088/139666759-7b88bd80-313e-447c-9d9f-7489f810b753.png)
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/model_and_printed_model.png" width=80% height=80%>
 
-
-
-## Supported Napari layers:
-
-Currently supported Napari layer types are:
-* Label layers: The label data is converted to surface data using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/) and is then exported using [Vedo](https://vedo.embl.es/).
-* Surface layers: Surface data can be natively exported with the [Vedo](https://vedo.embl.es/) library.
-* Image layers: Image layers can be converted to a surface with the `image to surface` function.
 
 ### Supported file formats:
-Currently supported file formats for export include:
-* *.stl*: Common data format for 3D printing, can be read by common 3D slicer programs (see below)
-* *.ply*: Common data storage format for surfaces, needs to be converted to *.stl* either with this plugin or with suitable software (e.g., Blender).
+Currently supported file formats for export include and rely on the [vedo io API](https://vedo.embl.es/autodocs/content/vedo/io.html#vedo.io).
+* *.stl*: [Standard triangle language](https://en.wikipedia.org/wiki/STL_%28file_format%29)
+* *.ply*: [Polygon file format](https://en.wikipedia.org/wiki/PLY_(file_format))
+* *.obj*: [Wavefront object](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
 
-## Usage
-This section explains which data can be written with the napari-stl-exported and how you can do so. 
+### Supported Napari layers:
 
-**Label/Surface layers**
+Currently supported Napari layer types are:
+* [Surface layers](https://napari.org/howtos/layers/surface.html)
+* [Label layers](https://napari.org/howtos/layers/labels.html): The label data is converted to surface data under the hood using the [marching cubes algorithm](https://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.marching_cubes) implemented in [scikit-image](https://scikit-image.org/) and is then exported using [Vedo](https://vedo.embl.es/). Warning: This can be slow for large image data!
 
-You can create sample label/surface data for export using the built-in functions as shown here:
+### Import/export
 
-<img src="./doc/1_sample_data.png" width=45% height=45%>
+**Interactively:** To export the data, simply save the selected layer with `File > Save Selected Layer(s)` and specify the file ending to be `some_file.[file_ending]`, for supported file types, see above. Similarly, supported file types can be imported into Napari with `File > `
 
-To export the data, simply save the selected layer with `File > Save Selected Layer(s)` and specify the file ending to be `some_file.stl` or `some_file.ply`. This works for both [label layers](https://napari-docs-example.github.io/tutorials/fundamentals/labels.html) and [surface layers](https://napari-docs-example.github.io/tutorials/fundamentals/surface.html).
+**From code**: A [Napari Label layer](https://napari.org/api/napari.layers.Labels.html) can be added to the viewer as described in the [napari reference](https://napari.org/gallery/add_labels.html?highlight=add_labels) with this code snippet:
 
-- Alternatively, you can add and export lbels layer data with this code snippet:
 ```python
 import napari
 import numpy as np
@@ -52,11 +45,19 @@ label_layer = viewer.add_labels(data, name='3D object')
 napari.save_layers(r'/some/path/test.stl', [label_layer])
 ```
 
-** Image data**
+### Sample data
+You can create sample label/surface data for export using the built-in functions as shown here:
 
-In order to convert image data to a surface, you can use the function `Plugins > napari-stl-exporter: Image to surface`, which will create this widget:
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/1_sample_data.png" width=45% height=45%>
 
-<img src="./doc/image_conversion_widget.PNG" width=45% height=45%>
+...or from code with
+
+```Python
+import napari_stl_exporter
+
+pyramid = napari_stl_exporter.make_pyramid_surface()
+
+```
 
 ### 3D-printing
 To actually send your object to a 3D-printer, it has to be further converted to the *.gcode* format with a Slicer program. The latter convert the 3D object to machine-relevant parameters (printing detail, motor trajectories, etc). Popular slicers are:
@@ -65,7 +66,8 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 * [Prusa Slicer](https://www.prusa3d.com/prusaslicer/): Tutorial [here](https://help.prusa3d.com/en/article/first-print-with-prusaslicer_1753)
 
 *Note*: You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
-![](https://raw.githubusercontent.com/jo-mueller/napari-stl-exporter/main/doc/pyramid_browser_screenshot.png)
+
+<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/pyramid_browser_screenshot.png" width=45% height=45%>
 
 ----------------------------------
 
@@ -97,7 +99,7 @@ Distributed under the terms of the [BSD-3] license,
 
 ## Issues
 
-If you encounter any problems, please [file an issue] along with a detailed description or post to image.sc and tag ```El_Pollo_Diablo```
+If you encounter any problems, please [file an issue](https://github.com/jo-mueller/napari-stl-exporter/issues) along with a detailed description or post to image.sc and tag ```El_Pollo_Diablo```
 
 [napari]: https://github.com/napari/napari
 [Cookiecutter]: https://github.com/audreyr/cookiecutter

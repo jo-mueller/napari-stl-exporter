@@ -6,8 +6,7 @@ from napari.types import LayerDataTuple
 # Taken from https://github.com/zoccoler/napari-metroid/blob/main/src/napari_metroid/_sample_data.py
 
 parent = pathlib.Path(__file__).parent.resolve()
-fname_pyramid = os.path.join(parent, '..', 'data', 'Pyramid.tif')
-fname_saxony = os.path.join(parent, '..', 'data', 'output_NASADEM.png')
+fname = os.path.join(parent, 'sample_data', 'Pyramid.tif')
 
 def make_pyramid_label() -> LayerDataTuple:
     """Generates a label image of a pyramid"""
