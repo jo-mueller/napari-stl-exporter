@@ -2,7 +2,7 @@ from napari.types import ImageData, SurfaceData
 from itertools import product
 from magicgui import magic_factory
 
-@magic_factory
+@magic_factory(auto_call=False, distance={'min': -1000, 'max': 1000})
 def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
     """
     Extrude a mesh by a given value.
@@ -26,7 +26,7 @@ def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
 
     return (np.flip(mesh.points(), axis=1), np.asarray(mesh.faces()))
 
-@magic_factory
+@magic_factory(auto_call=False, z_multiplier={'min': -1000, 'max': 1000})
 def image_to_surface(image: ImageData,
                      z_multiplier: float = 1.0,
                      solidify: bool = True) -> SurfaceData:
@@ -66,14 +66,17 @@ def image_to_surface(image: ImageData,
     surface = (points_mesh, tri.simplices)
 
     if solidify:
-
+        import vedo
         # extrude mesh by maximum z-value * -1 and set all values of the extruded
         # vertices to the same value to create a flat bottom.
-        extrude_distance = points_mesh[:, 0].max()
-        extruded_surface = list(extrude(surface, -extrude_distance))
+        extrude_distance = abs(points_mesh[:, 0]).max()
+        mesh = vedo.mesh.Mesh((np.flip(surface[0], axis=1), surface[1]))
+        mesh = mesh.extrude(zshift=extrude_distance)
 
-        extrude_surface[0][len(surface) + 1:] = -0.1
+        # extrude a little more to be safe
+        extruded_surface = [np.flip(mesh.points(), axis=1), np.asarray(mesh.faces())]
+        idxs = np.where(extruded_surface[0][:, 0] > 0)
+        extruded_surface[0][idxs, 0] = 0.1
         surface = extruded_surface
-
 
     return surface

@@ -43,7 +43,7 @@ contributions:
 
     widgets:
     - command: napari-stl-exporter.convert_image_to_surface
-      display_name: Image to surface
+      display_name: 2D Image to surface
 
     - command: napari-stl-exporter.extrude
       display_name: Extrude mesh
