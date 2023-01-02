@@ -2,6 +2,30 @@ from napari.types import ImageData, SurfaceData
 from itertools import product
 from magicgui import magic_factory
 
+@magic_factory(auto_call=False, distance={'min': -1000, 'max': 1000})
+def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
+    """
+    Extrude a mesh by a given value.
+
+    This offsets all vertices in a mesh by a given value. New faces will be created
+    at the edge of non-closed meshs, thus solidifying meshes.
+    
+    Parameters
+    ----------
+    surface: SUrfaceData
+
+    Returns
+    -------
+    surface: SurfaceData
+    """
+    import vedo
+    import numpy as np
+
+    mesh = vedo.mesh.Mesh((np.flip(surface[0], axis=1), surface[1]))
+    mesh = mesh.extrude(zshift=distance)
+
+    return (np.flip(mesh.points(), axis=1), np.asarray(mesh.faces()))
+
 @magic_factory(auto_call=False, z_multiplier={'min': -1000, 'max': 1000})
 def image_to_surface(image: ImageData,
                      z_multiplier: float = 1.0,
