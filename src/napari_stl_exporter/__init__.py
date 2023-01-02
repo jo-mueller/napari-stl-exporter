@@ -1,4 +1,4 @@
-__version__ = "0.0.11"
+__version__ = "0.1.0"
 
 from ._writer import napari_write_labels, napari_write_surfaces
 from ._reader import napari_import_surface

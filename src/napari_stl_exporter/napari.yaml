@@ -1,5 +1,5 @@
 name: napari-stl-exporter
-schema_version: 0.0.10
+schema_version: 0.1.0
 contributions:
     commands:
     - id: napari-stl-exporter.write_labels
