@@ -1,13 +1,12 @@
-from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surfaces
-from napari_stl_exporter import napari_import_surface
-from napari_stl_exporter._sample_data import make_pyramid_label, make_pyramid_surface
 import numpy as np
 import os
+import vedo
 
 supported_formats = ['.stl', '.ply', '.obj']
 
 def test_label_conversion():
     import vedo
+    from napari_stl_exporter._writer import _labels_to_mesh, napari_write_labels, napari_write_surfaces
     label_image = np.zeros((100, 100, 100))
     label_image[25:75, 25:75, 25:75] = 1
 
@@ -17,6 +16,7 @@ def test_label_conversion():
 
 def test_writer(tmpdir):
     from skimage import measure
+    from napari_stl_exporter._writer import napari_write_labels, napari_write_surfaces
     label_image = np.zeros((100, 100, 100))
     label_image[25:75, 25:75, 25:75] = 1
 
@@ -49,6 +49,7 @@ def test_writer_viewer(make_napari_viewer, tmpdir):
     assert os.path.exists(os.path.join(tmpdir, 'test.stl'))
 
 def test_sample_data():
+    from napari_stl_exporter._sample_data import make_pyramid_label, make_pyramid_surface
     label_image = make_pyramid_label()
     assert label_image is not None
 
@@ -57,6 +58,9 @@ def test_sample_data():
 
 def test_reader(make_napari_viewer, tmpdir):
     import napari_stl_exporter
+    from napari_stl_exporter._sample_data import make_pyramid_surface
+    from napari_stl_exporter._writer import napari_write_surfaces
+    from napari_stl_exporter._reader import napari_import_surface
 
     pyramid = napari_stl_exporter.make_pyramid_surface()[0][0]
     viewer = make_napari_viewer()
@@ -75,4 +79,4 @@ def test_reader(make_napari_viewer, tmpdir):
 
 if __name__ == '__main__':
     import napari
-    test_reader(napari.Viewer, r'C:\Users\johamuel\Desktop')
+    test_reader(napari.Viewer, r'C:\Users\johan\OneDrive\Desktop')
