@@ -22,6 +22,14 @@ contributions:
       title: Read surface data from supported file types
       python_name: napari_stl_exporter._reader:get_reader
 
+    - id: napari-stl-exporter.convert_image_to_surface
+      title: Convert 2D image data to surface
+      python_name: napari_stl_exporter._image_to_surface:image_to_surface_widget
+
+    - id: napari-stl-exporter.extrude
+      title: Extrude mesh
+      python_name: napari_stl_exporter._image_to_surface:extrude_widget
+
     sample_data:
     - command: napari-stl-exporter.make_pyramid_label
       display_name: Pyramid label image
@@ -29,6 +37,16 @@ contributions:
     - command: napari-stl-exporter.make_pyramid_surface
       display_name: Pyramid surface
       key: PSL
+    - command: napari-stl-exporter.make_landscape_image
+      display_name: Landscape elevation model
+      key: LEM
+
+    widgets:
+    - command: napari-stl-exporter.convert_image_to_surface
+      display_name: 2D Image to surface
+
+    - command: napari-stl-exporter.extrude
+      display_name: Extrude mesh
 
     writers:
     - command: napari-stl-exporter.write_labels
