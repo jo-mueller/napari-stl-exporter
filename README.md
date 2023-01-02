@@ -69,9 +69,9 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 
 <img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/pyramid_browser_screenshot.png" width=45% height=45%>
 
-** Digital elevation models**
+#### Digital elevation models
 
-DIgital elevation models (DEMs) can be printed with the st-exporter following these steps:
+DIgital elevation models (DEMs) can be printed with the napari-stl-exporter following these steps:
 
 1. Go to the [open topography repository](https://portal.opentopography.org/raster?opentopoID=OTSDEM.032021.4326.2) and select a region of your choice, then download it as a GeoTiff file (`.tif`, intensity encodes elevation)
 2. Open the downloaded tif image use the image conversion plugin (´Plugins > napari-stl-exporter > 2D image to surface´) to convert the downloaded image to a surface. CHeck the `solidify` option to make it readily 3D-printable.
