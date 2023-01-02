@@ -76,7 +76,7 @@ def image_to_surface(image: ImageData,
         # extrude a little more to be safe
         extruded_surface = [np.flip(mesh.points(), axis=1), np.asarray(mesh.faces())]
         idxs = np.where(extruded_surface[0][:, 0] > 0)
-        extruded_surface[0][idxs, 0] = 0.1
+        extruded_surface[0][idxs, 0] = 1
         surface = extruded_surface
 
     return surface
