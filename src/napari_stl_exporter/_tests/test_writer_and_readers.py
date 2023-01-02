@@ -75,3 +75,25 @@ def test_reader(make_napari_viewer, tmpdir):
         reader = napari_stl_exporter._reader.get_reader(path)
         data = reader(path)
         assert data is not None
+
+def test_image_surface_conversion():
+    from skimage import data
+    from napari_stl_exporter._image_to_surface import image_to_surface
+
+    image = data.cell()
+    surface = image_to_surface(image)
+
+def test_widgets(make_napari_viewer):
+    from napari_stl_exporter._image_to_surface import image_to_surface_widget, extrude_widget
+    
+    viewer = make_napari_viewer()
+
+    widget_surface = image_to_surface_widget()
+    widget_extrude = extrude_widget()
+
+    viewer.window.add_dock_widget(widget_surface)
+    viewer.window.add_dock_widget(widget_extrude)
+
+if  __name__ == '__main__':
+    import napari
+    test_widgets(napari.Viewer)
