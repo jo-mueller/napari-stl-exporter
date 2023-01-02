@@ -24,11 +24,11 @@ contributions:
 
     - id: napari-stl-exporter.convert_image_to_surface
       title: Convert 2D image data to surface
-      python_name: napari_stl_exporter._image_to_surface:image_to_surface
+      python_name: napari_stl_exporter._image_to_surface:image_to_surface_widget
 
     - id: napari-stl-exporter.extrude
       title: Extrude mesh
-      python_name: napari_stl_exporter._image_to_surface:extrude
+      python_name: napari_stl_exporter._image_to_surface:extrude_widget
 
     sample_data:
     - command: napari-stl-exporter.make_pyramid_label

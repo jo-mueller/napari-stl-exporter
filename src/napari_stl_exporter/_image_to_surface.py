@@ -2,7 +2,11 @@ from napari.types import ImageData, SurfaceData
 from itertools import product
 from magicgui import magic_factory
 
-@magic_factory(auto_call=False, distance={'min': -1000, 'max': 1000})
+@magic_factory(auto_call=False, distance={'minimum': -1000, 'maximum': 1000})
+def extrude_widget( surface: SurfaceData,
+                    distance: float = 1.0) -> SurfaceData:
+    return extrude(surface, distance)
+
 def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
     """
     Extrude a mesh by a given value.
@@ -26,7 +30,17 @@ def extrude(surface: SurfaceData, distance: float = 1.0) -> SurfaceData:
 
     return (np.flip(mesh.points(), axis=1), np.asarray(mesh.faces()))
 
-@magic_factory(auto_call=False, z_multiplier={'min': -1000, 'max': 1000})
+@magic_factory(auto_call=False, z_multiplier={'minimum': -10, 'maximum': 10})
+def image_to_surface_widget(
+    image: ImageData,
+    z_multiplier: float = 1.0,
+    solidify: bool = True) -> SurfaceData:
+
+    return  image_to_surface(
+        image,
+        z_multiplier=z_multiplier,
+        solidify=solidify)
+
 def image_to_surface(image: ImageData,
                      z_multiplier: float = 1.0,
                      solidify: bool = True) -> SurfaceData:
