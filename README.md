@@ -8,7 +8,7 @@
 
 This plugin allows to import and export surface data in Napari to common file formats. The generated file formats can be read by other common applications, and - in particular - allow *3D-printing*.
 
-<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/model_and_printed_model.png" width=80% height=80%>
+![](https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/model_and_printed_model.png)
 
 
 ### Supported file formats:
@@ -48,7 +48,7 @@ napari.save_layers(r'/some/path/test.stl', [label_layer])
 ### Sample data
 You can create sample label/surface data for export using the built-in functions as shown here:
 
-<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/1_sample_data.png" width=45% height=45%>
+![](https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/1_sample_data.png)
 
 ...or from code with
 
@@ -67,7 +67,7 @@ To actually send your object to a 3D-printer, it has to be further converted to 
 
 *Note*: You can also upload the STL file to [github.com](https://github.com) and interact with it in the browser:
 
-<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/pyramid_browser_screenshot.png" width=45% height=45%>
+![](https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/pyramid_browser_screenshot.png)
 
 #### Digital elevation models
 
@@ -76,7 +76,7 @@ DIgital elevation models (DEMs) can be printed with the napari-stl-exporter foll
 1. Go to the [open topography repository](https://portal.opentopography.org/raster?opentopoID=OTSDEM.032021.4326.2) and select a region of your choice, then download it as a GeoTiff file (`.tif`, intensity encodes elevation)
 2. Open the downloaded tif image use the image conversion plugin (´Plugins > napari-stl-exporter > 2D image to surface´) to convert the downloaded image to a surface. CHeck the `solidify` option to make it readily 3D-printable.
 
-<img src="https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/landscape_to_surface.png">
+![](https://github.com/jo-mueller/napari-stl-exporter/blob/main/doc/landscape_to_surface.png)
 
 3. Export the created surface layer as `.stl` or `.ply` file. Open it in your Slicer of choice (you may have to scale it according to the size limitations of your printer) and off you go!
 
