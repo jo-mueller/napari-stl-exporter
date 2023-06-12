@@ -30,6 +30,6 @@ def napari_import_surface(path: str) -> List[LayerDataTuple]:
     SurfaceData
 
     """
-    mesh = vedo.io.load(path, unpack=True, force=False)
+    mesh = vedo.load(path, unpack=True, force=False)
     _mesh = [mesh.points(), np.asarray(mesh.faces())]
     return [tuple([_mesh, {}, 'surface'])]
