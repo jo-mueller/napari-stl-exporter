@@ -10,6 +10,13 @@ contributions:
       title: Write Surface
       python_name: napari_stl_exporter._writer:napari_write_surfaces
 
+    - id: napari-stl-exporter.write_points
+      title: Write Points
+      python_name: napari_stl_exporter._writer:napari_write_points
+    - id: napari_stl_exporter.read_points
+      title: Read Points
+      python_name: napari_stl_exporter._reader:napari_import_points
+
     - id: napari-stl-exporter.make_pyramid_label
       title: Create a label image of a pyramid
       python_name: napari_stl_exporter._sample_data:make_pyramid_label
@@ -61,6 +68,12 @@ contributions:
       filename_extensions: [".stl", ".ply", ".obj"]
       display_name: surface
 
+    - command: napari-stl-exporter.write_points
+      layer_types:
+      - points
+      filename_extensions: [".vtp"]
+      display_name: points
+
     readers:
     - command: napari-stl-exporter.import_surface
       accepts_directories: false
@@ -68,3 +81,7 @@ contributions:
       - "*.stl"
       - "*.ply"
       - "*.obj"
+    - command: napari-stl-exporter.read_points
+      accepts_directories: false
+      filename_patterns:
+      - "*.vtp"
